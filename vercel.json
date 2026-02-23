@@ -1,6 +1,22 @@
 {
-  "buildCommand": "composer install --no-dev --optimize-autoloader && npm ci && npm run build",
+  "version": 2,
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
   "outputDirectory": "public",
   "framework": null,
-  "installCommand": "composer install && npm ci"
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.1"
+    }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "dest": "/build/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ]
 }
