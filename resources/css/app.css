@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Focus rings for accessibility (keyboard/skip links) */
+@layer utilities {
+    .focus-ring {
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+    }
+}
+
+/* Print: hide nav/footer, simplify layout */
+@media print {
+    .public-header,
+    header[class*="sticky"],
+    footer,
+    .no-print,
+    [role="navigation"] {
+        display: none !important;
+    }
+    body {
+        font-size: 12pt;
+        color: #111;
+    }
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.85em;
+        color: #666;
+    }
+}
