@@ -157,4 +157,11 @@ Route::middleware(['auth', 'role:lecturer'])->prefix('lecturer')->name('lecturer
     Route::get('messages', [LecturerMessageController::class, 'index'])->name('messages.index');
 });
 
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/migrate-now', function() {
+    Artisan::call('migrate', ["--force" => true]);
+    return "Migrated!";
+});
+
 require __DIR__.'/auth.php';
